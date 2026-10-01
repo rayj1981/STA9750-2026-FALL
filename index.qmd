@@ -1,0 +1,18 @@
+---
+title: "Personal Website"
+format: html
+---
+
+
+Raymond Jiang First sem student at Baruch college studying Stats and Data science. I did a SQM major with a math minor at Baruch as a undergrad. This past summer I did machine learning research at CUMC working with HIV BNAB's. 
+
+
+Click [here](./Raymond_J_Resume.pdf) to view my resume.
+
+
+```{r}
+#| include: false
+1+1
+```
+--------------
+Last Updated: `r format(Sys.time(), "%A %m %d, %Y at %H:%M%p")`
