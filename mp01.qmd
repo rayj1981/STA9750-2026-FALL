@@ -29,7 +29,8 @@ However, pre-taped content performed much better overall. The average pre-taped 
 
 Netflix should continue testing a small number of high-profile live events such as the the Paul vs. Tyson fight, especially events that can create marketing attention or attract new subscribers. However, the data suggests that Netflix should keep most of its content investment focused on pre-taped, multi-season shows because they generate much higher viewing hours overall.                      
 
-Lastly We suggest Netflix focus more on documentaries style shows.
+Lastly We suggest Netflix focus more on Limited series. To examine the performance of limited series, I summed viewing hours for each title across all reporting periods and ranked the titles with “Limited Series” in their names. The results show that several Korean dramas are among the most-viewed limited series in the Netflix catalog.
+King the Land: Limited Series had the highest total viewership, receiving approximately 1.34 billion hours across all seven reporting periods. Queen of Tears: Limited Series received about 1.10 billion hours across five periods, while True Beauty: Limited Series received approximately 1.07 billion hours across six periods. Other high-performing Korean titles include When Life Gives You Tangerines, My Demon, Love Next Door, and Crash Landing on You. These results suggest that Korean limited series can attract large international audiences and remain valuable in Netflix’s catalog over multiple reporting periods.
 
 ## Task 1-3: Loading, Cleaning, Fixing Data
 ```{r}
@@ -449,7 +450,27 @@ If a title was marked as a live event in any period, it is labeled Live events. 
 
 This report shows that there are almost no live events compared to the pre-taped events (286 vs 24,141). They had similar median hours viewed with live events receiving 1.9 million hours and pre-taped content receiving 1.8 million hours. This shows that on average both Live events and Pre-taped content perform on par with each other.
 
+```{r}
+possible_documentaries <- NETFLIX_DATA |>
+  filter(
+    str_detect(
+      title,
+      regex(
+        "Limited Series",
+        ignore_case = TRUE
+      )
+    )
+  ) |>
+  summarize(
+    total_hours_viewed = sum(hours_viewed, na.rm = TRUE),
+    periods_present = n_distinct(period),
+    .by = title
+  ) |>
+  arrange(desc(total_hours_viewed))
 
+possible_documentaries |>
+  slice_head(n = 30)
+```
 ## More analysis
 According to the Netflix Top 10 Most Popular Movies of All Time official list [Netflix’s official Most Popular Movies list](https://www.netflix.com/tudum/top10/most-popular), here are Netflix's top 10 most-watched films based on views during their first 91 days:
 
